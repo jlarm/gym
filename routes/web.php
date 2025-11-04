@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use App\Http\Controllers\CreateWorkoutController;
+use App\Http\Controllers\IndexWorkoutController;
 use App\Livewire\Settings\Appearance;
 use App\Livewire\Settings\Password;
 use App\Livewire\Settings\Profile;
@@ -22,7 +23,7 @@ Route::get('workout/create', CreateWorkoutController::class)
     ->middleware(['auth', 'verified'])
     ->name('workout.create');
 
-Route::view('workout/{workout:uuid}', 'workout')
+Route::get('workout/{workout:uuid}', IndexWorkoutController::class)
     ->middleware(['auth', 'verified'])
     ->name('workout');
 
