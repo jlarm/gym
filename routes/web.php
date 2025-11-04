@@ -8,6 +8,7 @@ use App\Livewire\Settings\Appearance;
 use App\Livewire\Settings\Password;
 use App\Livewire\Settings\Profile;
 use App\Livewire\Settings\TwoFactor;
+use App\Livewire\Workout\Edit as WorkoutEdit;
 use Illuminate\Support\Facades\Route;
 use Laravel\Fortify\Features;
 use Laravel\Fortify\Http\Controllers\AuthenticatedSessionController;
@@ -97,6 +98,10 @@ Route::get('workout/create', CreateWorkoutController::class)
 Route::get('workout/{workout:uuid}', IndexWorkoutController::class)
     ->middleware(['auth', 'verified'])
     ->name('workout');
+
+Route::get('workout/{workout:uuid}/edit', WorkoutEdit::class)
+    ->middleware(['auth', 'verified'])
+    ->name('workout.edit');
 
 Route::middleware(['auth'])->group(function () {
     Route::redirect('settings', 'settings/profile');
