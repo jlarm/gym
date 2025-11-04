@@ -8,6 +8,7 @@ use Carbon\CarbonImmutable;
 use Database\Factories\ExerciseFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 /**
  * @property int $id
@@ -33,5 +34,15 @@ final class Exercise extends Model
             'created_at' => 'datetime',
             'updated_at' => 'datetime',
         ];
+    }
+
+    /**
+     * @return BelongsToMany<Workout, $this>
+     */
+    public function workouts(): BelongsToMany
+    {
+        return $this->belongsToMany(Workout::class)
+            ->withPivot('order')
+            ->withTimestamps();
     }
 }
