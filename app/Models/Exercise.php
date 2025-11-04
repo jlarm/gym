@@ -4,11 +4,14 @@ declare(strict_types=1);
 
 namespace App\Models;
 
+use App\Observers\ExerciseObserver;
 use Carbon\CarbonImmutable;
 use Database\Factories\ExerciseFactory;
+use Illuminate\Database\Eloquent\Attributes\ObservedBy;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
  * @property int $id
@@ -17,6 +20,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
  * @property CarbonImmutable $created_at
  * @property CarbonImmutable $updated_at
  */
+#[ObservedBy(ExerciseObserver::class)]
 final class Exercise extends Model
 {
     /** @use HasFactory<ExerciseFactory> */
@@ -44,5 +48,13 @@ final class Exercise extends Model
         return $this->belongsToMany(Workout::class)
             ->withPivot('order')
             ->withTimestamps();
+    }
+
+    /**
+     * @return HasMany<Set, $this>
+     */
+    public function sets(): HasMany
+    {
+        return $this->hasMany(Set::class);
     }
 }

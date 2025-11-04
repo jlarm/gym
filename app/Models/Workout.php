@@ -47,4 +47,12 @@ final class Workout extends Model
             ->withTimestamps()
             ->orderBy('exercise_workout.order');
     }
+
+    /**
+     * @return HasMany<Set, $this>
+     */
+    public function sets(): HasMany
+    {
+        return $this->hasMany(Set::class);
+    }
 }
