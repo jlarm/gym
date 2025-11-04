@@ -19,7 +19,19 @@ final class WorkoutFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'created_at' => fake()->dateTimeBetween('-60 days', 'now'),
+            'updated_at' => now(),
         ];
+    }
+
+    /**
+     * Create a workout from a specific date
+     */
+    public function forDate(string $date): static
+    {
+        return $this->state(fn (array $attributes) => [
+            'created_at' => $date,
+            'updated_at' => $date,
+        ]);
     }
 }

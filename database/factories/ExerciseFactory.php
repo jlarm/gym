@@ -18,8 +18,26 @@ final class ExerciseFactory extends Factory
      */
     public function definition(): array
     {
+        $exercises = [
+            'Bench Press',
+            'Squat',
+            'Deadlift',
+            'Overhead Press',
+            'Barbell Row',
+            'Pull Ups',
+            'Bicep Curls',
+            'Tricep Extensions',
+            'Lateral Raises',
+            'Leg Press',
+            'Lunges',
+            'Romanian Deadlift',
+            'Incline Bench Press',
+            'Dumbbell Rows',
+            'Face Pulls',
+        ];
+
         return [
-            'name' => fake()->words(2, true),
+            'name' => fake()->randomElement($exercises),
         ];
     }
 }
