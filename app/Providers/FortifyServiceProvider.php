@@ -31,6 +31,7 @@ final class FortifyServiceProvider extends ServiceProvider
         $this->configureActions();
         $this->configureViews();
         $this->configureRateLimiting();
+        $this->configureRegistrationMiddleware();
     }
 
     /**
@@ -70,5 +71,13 @@ final class FortifyServiceProvider extends ServiceProvider
 
             return Limit::perMinute(5)->by($throttleKey);
         });
+    }
+
+    /**
+     * Configure registration middleware.
+     */
+    private function configureRegistrationMiddleware(): void
+    {
+        Fortify::ignoreRoutes();
     }
 }
