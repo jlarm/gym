@@ -67,7 +67,7 @@ Route::middleware(['auth'])->group(function () {
 // Password Confirmation routes
 Route::middleware(['auth'])->group(function () {
     Route::get('/user/confirm-password', [ConfirmablePasswordController::class, 'show'])->name('password.confirm');
-    Route::post('/user/confirm-password', [ConfirmablePasswordController::class, 'store']);
+    Route::post('/user/confirm-password', [ConfirmablePasswordController::class, 'store'])->name('password.confirm.store');
     Route::get('/user/confirmed-password-status', [ConfirmedPasswordStatusController::class, 'show'])->name('password.confirmation');
 });
 
