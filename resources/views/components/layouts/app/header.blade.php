@@ -11,6 +11,9 @@
                 <flux:navbar.item :href="route('dashboard')" :current="request()->routeIs('dashboard')" wire:navigate>
                     {{ __('Dashboard') }}
                 </flux:navbar.item>
+                <flux:navbar.item :href="route('workout.create')" :current="request()->routeIs('workout')" wire:navigate>
+                    {{ __('Start Workout') }}
+                </flux:navbar.item>
             </flux:navbar>
 
             <flux:spacer />

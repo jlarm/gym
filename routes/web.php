@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use App\Http\Controllers\CreateWorkoutController;
 use App\Livewire\Settings\Appearance;
 use App\Livewire\Settings\Password;
 use App\Livewire\Settings\Profile;
@@ -16,6 +17,14 @@ Route::get('/', function () {
 Route::view('dashboard', 'dashboard')
     ->middleware(['auth', 'verified'])
     ->name('dashboard');
+
+Route::get('workout/create', CreateWorkoutController::class)
+    ->middleware(['auth', 'verified'])
+    ->name('workout.create');
+
+Route::view('workout/{workout:uuid}', 'workout')
+    ->middleware(['auth', 'verified'])
+    ->name('workout');
 
 Route::middleware(['auth'])->group(function () {
     Route::redirect('settings', 'settings/profile');
