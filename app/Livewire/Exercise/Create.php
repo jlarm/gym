@@ -7,7 +7,9 @@ namespace App\Livewire\Exercise;
 use App\Models\Exercise;
 use App\Models\Set;
 use App\Models\Workout;
+use Illuminate\Support\Collection;
 use Illuminate\View\View;
+use Livewire\Attributes\Computed;
 use Livewire\Attributes\Locked;
 use Livewire\Component;
 
@@ -27,6 +29,26 @@ final class Create extends Component
     public function mount(): void
     {
         $this->addSet();
+    }
+
+    /**
+     * Get the latest sets for the selected exercise
+     *
+     * @return Collection<int, Set>
+     */
+    #[Computed]
+    public function latestSets(): Collection
+    {
+        if (! $this->selectedExerciseId) {
+            return collect();
+        }
+
+        return Set::query()
+            ->where('exercise_id', $this->selectedExerciseId)
+            ->whereHas('workout', fn ($query) => $query->where('id', '!=', $this->workout->id))
+            ->orderBy('created_at', 'desc')
+            ->take(3)
+            ->get();
     }
 
     public function addSet(): void

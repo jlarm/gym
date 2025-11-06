@@ -38,6 +38,24 @@
 
             {{-- Sets Section --}}
             @if($selectedExerciseId)
+                {{-- Latest Sets Info --}}
+                @if($this->latestSets->isNotEmpty())
+                    <div class="rounded-lg bg-zinc-100 dark:bg-zinc-800 p-4">
+                        <flux:heading size="sm" class="mb-2">Last time</flux:heading>
+                        <div class="space-y-1 text-sm text-zinc-600 dark:text-zinc-400">
+                            @foreach($this->latestSets as $set)
+                                <div class="flex gap-2">
+                                    <span class="font-medium">{{ $set->reps }} reps</span>
+                                    @if($set->weight)
+                                        <span>×</span>
+                                        <span class="font-medium">{{ $set->weight }} lbs</span>
+                                    @endif
+                                </div>
+                            @endforeach
+                        </div>
+                    </div>
+                @endif
+
                 <div>
                     <div class="flex items-center justify-between mb-3">
                         <flux:heading size="sm">Sets</flux:heading>
